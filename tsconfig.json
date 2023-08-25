@@ -3,7 +3,6 @@
   "compilerOptions": {
     "typeRoots": ["src/shared/types", "node_modules/@types"],
     "target": "es5",
-//    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
