@@ -6,7 +6,7 @@ import { xml } from './statics/index'
 
 
 const IconBird = (props: Size) => {
-    const { size} = props
+    const { size } = props
     return(
         <View style={styles.container}>
             <SvgXml {...{xml}} width={size?.width || 200} height={size?.height || 200} />

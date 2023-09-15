@@ -1,6 +1,7 @@
 export type RootStackParamList = {
-    TestPage: undefined;
+    WelcomePage: undefined;
+    AddPost: undefined;
     Autorization: object;
     Registration: object;
-    MainPage: object;
+    MainPage: undefined;
   };

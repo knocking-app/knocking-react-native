@@ -6,13 +6,14 @@ import Registration from './src/pages/registration/ui';
 import { RootStackParamList } from './src/app/navigation';
 import MainPage from './src/pages/main/ui';
 import { Provider as PaperProvider } from 'react-native-paper';
+import AddPost from './src/pages/addPost/ui';
+import { appColor } from './src/shared/theme/color';
 
 
 
-{/* <Autorization /> */}
 
 
-const TestPage = (props: any) => {
+const WelcomePage = (props: any) => {
   const { navigation } = props
 
   return(
@@ -32,33 +33,36 @@ export default function App() {
   return (
     <PaperProvider>
       <NavigationContainer>
-          {/* <View>
-            <AppBar /> */}
-            {/* <MainPage /> */}
             <Stack.Navigator>
-            <Stack.Screen 
-                name='TestPage' 
-                component={TestPage}
-                options={{ title: 'Welcome' }}
-              />
               <Stack.Screen 
-                name='Autorization' 
-                component={Autorization}
-              />
-              <Stack.Screen 
-                name='Registration' 
-                component={Registration}
-              />
-              <Stack.Screen 
-                name='MainPage' 
-                component={MainPage}
-                options={{ header: () => null }}
-
-              />
-              {/* <MainPage /> */}
-            </Stack.Navigator>
-            
-        {/* </View> */}
+                  name='WelcomePage' 
+                  component={WelcomePage}
+                  options={{ title: 'Welcome' }}
+                />
+                <Stack.Screen 
+                  name='Autorization' 
+                  component={Autorization}
+                />
+                <Stack.Screen 
+                  name='Registration' 
+                  component={Registration}
+                />
+                <Stack.Screen 
+                  name='MainPage' 
+                  component={MainPage}
+                  options={{ header: () => null }}
+                />
+                <Stack.Screen 
+                  name='AddPost' 
+                  component={AddPost}
+                  options={{ 
+                    title: 'На гланую',
+                    headerStyle: {
+                      backgroundColor: appColor.header,
+                    }, 
+                  }}
+                />
+            </Stack.Navigator>            
         </NavigationContainer>
       </PaperProvider>
   )
