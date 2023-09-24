@@ -8,6 +8,7 @@ import MainPage from './src/pages/main/ui';
 import { Provider as PaperProvider } from 'react-native-paper';
 import AddPost from './src/pages/addPost/ui';
 import { appColor } from './src/shared/theme/color';
+import CommentPage from './src/pages/commentPage/ui'
 
 
 
@@ -62,6 +63,15 @@ export default function App() {
                     }, 
                   }}
                 />
+                <Stack.Screen 
+                  name='CommentPage' 
+                  component={CommentPage}
+                  options={{ 
+                    title: 'Назад',
+                    headerStyle: {
+                      backgroundColor: appColor.header,
+                    }, 
+                  }}                />
             </Stack.Navigator>            
         </NavigationContainer>
       </PaperProvider>

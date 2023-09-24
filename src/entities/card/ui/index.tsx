@@ -1,11 +1,15 @@
-import { SafeAreaView, ScrollView, View } from 'react-native';
-import { Button, Card, Chip, IconButton, Text, MD3Colors, Tooltip, Badge } from 'react-native-paper';
-import { CardProps } from './index.types';
+import { View } from 'react-native';
+import { Card, IconButton, Text, Badge } from 'react-native-paper';
+import { CardProps, ProfileScreenNavigationProp } from './index.types';
 import { styles } from './index.styled';
+import { useNavigation } from '@react-navigation/native';
+
 
 const MyCard = (props: CardProps) => {
- const { title, description, url} = props
-  return (
+    const { title, description, url} = props
+
+    const navigation = useNavigation<ProfileScreenNavigationProp>();
+    return (
         <Card style={{ width: '100%', marginBottom: 8, marginTop:16 }}>
             <Card.Cover
                 loadingIndicatorSource={{uri: '../../shared/icons/birdIcon/ui/statics/logoBird.svg'}}
@@ -17,11 +21,9 @@ const MyCard = (props: CardProps) => {
             <Text variant="bodyMedium">
                             Card content Card content Card content Card content Card content Card content
                             Card content Card content Card content Card content
-                            Card content Card content Card content Card contentCard content Card content Card content Card content
-                            
+                            Card content Card content Card content Card contentCard content Card content Card content Card content 
             </Text>
             </Card.Content>
-            {/* <View style={styles.buttonGroup}> */}
             <Card.Actions>
                 <View>
                     <IconButton
@@ -46,7 +48,7 @@ const MyCard = (props: CardProps) => {
                             icon='comment-outline'
                             mode='contained-tonal'
                             size={20}
-                            onPress={() => console.log('Pressed')}
+                            onPress={() => navigation.navigate('CommentPage')}
                         />
                     <Badge style={styles.badge} size={16}>0</Badge>
                 </View>

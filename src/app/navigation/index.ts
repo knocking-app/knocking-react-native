@@ -4,4 +4,5 @@ export type RootStackParamList = {
     Autorization: object;
     Registration: object;
     MainPage: undefined;
+    CommentPage: undefined;
   };
