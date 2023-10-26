@@ -17,12 +17,12 @@ const MyCard = (props: CardProps) => {
                 resizeMode={'cover'}
             />
             <Card.Content>
-            <Text variant="titleLarge">Card title</Text>
-            <Text variant="bodyMedium">
-                            Card content Card content Card content Card content Card content Card content
-                            Card content Card content Card content Card content
-                            Card content Card content Card content Card contentCard content Card content Card content Card content 
-            </Text>
+                <Text variant="titleLarge">Card title</Text>
+                <Text variant="bodyMedium">
+                                Card content Card content Card content Card content Card content Card content
+                                Card content Card content Card content Card content
+                                Card content Card content Card content Card contentCard content Card content Card content Card content 
+                </Text>
             </Card.Content>
             <Card.Actions>
                 <View>

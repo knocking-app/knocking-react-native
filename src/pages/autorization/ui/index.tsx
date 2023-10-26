@@ -1,5 +1,5 @@
 import { TextInput, Button, Text, HelperText } from 'react-native-paper';
-import { NativeSyntheticEvent, TextInputChangeEventData, View } from 'react-native';
+import { KeyboardAvoidingView, NativeSyntheticEvent, TextInputChangeEventData, View } from 'react-native';
 import { styles } from './index.styled';
 import { useState } from 'react';
 import IconBird from '../../../shared/icons/birdIcon';
@@ -42,7 +42,7 @@ const Autorization = (props: Props) => {
                                             value={values.login}
                                             placeholder="Введите логин"
                                             style={{ marginBottom: 20 }}
-                                            error={!!errors.login}
+                                            error={!!errors.login}      
                                         />
                                         <HelperText type="error" visible={!!errors.login}>
                                             {errors.login}
@@ -58,7 +58,7 @@ const Autorization = (props: Props) => {
                                             secureTextEntry={isShowPassword}
                                             error={!!errors.password}
                                             right={<TextInput.Icon onPress={() => setIsShowPassword((prev) => !prev)} icon="eye" />}
-                                            style={{ marginBottom: 8 }}
+                                            style={{ marginBottom: 8 }}            
                                         />
                                         <HelperText type="error" visible={!!errors.password}>
                                             {errors.password}
@@ -81,7 +81,9 @@ const Autorization = (props: Props) => {
                             </View>
                         )}
                 </Formik>
-                <IconBird />
+                <View style={styles.iconWrapper}>
+                    <IconBird />
+                </View>
         </View> 
     )
 }
