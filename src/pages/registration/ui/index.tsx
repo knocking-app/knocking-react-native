@@ -7,13 +7,18 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../../app/navigation';
 import { Formik } from 'formik';
 import { validationSchema } from '../config';
+import { isShowPassword } from './index.types';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Registration'>;
 
 
 const Registration = (props: Props) => {
     const { navigation } = props
-    const [isShowPassword, setIsShowPassword] = useState(true)
+    const [isShowPassword, setIsShowPassword] = useState<isShowPassword>({
+        password: false,
+        verification: false
+    })
+
 
     return(
         <View style={styles.container}>
@@ -21,6 +26,7 @@ const Registration = (props: Props) => {
                 initialValues={{  
                     login: '',
                     password: '',
+                    verification: '',
                     email: ''
                 }}
                 onSubmit={(values) =>{ 
@@ -35,7 +41,7 @@ const Registration = (props: Props) => {
                             <TextInput       
                                 mode="outlined"
                                 onChangeText={handleChange('login')}
-                                label="Логин"                    
+                                label="Логин" 
                                 value={values.login}
                                 placeholder="Введите логин"
                                 style={{ marginBottom: 20 }}
@@ -66,13 +72,29 @@ const Registration = (props: Props) => {
                                 label="Пароль"
                                 value={values.password}
                                 placeholder="Введите пароль"
-                                secureTextEntry={isShowPassword}
-                                right={<TextInput.Icon onPress={() => setIsShowPassword((prev) => !prev)} icon="eye" />}
+                                secureTextEntry={isShowPassword.password}
+                                right={<TextInput.Icon onPress={() => setIsShowPassword((prev) => ({...prev, password: !prev.password}))} icon="eye" />}
                                 style={{ marginBottom: 8 }}
                                 error={!!errors.password}
                             /> 
                             <HelperText type="error" visible={!!errors.password}>
                                 {errors.password}
+                            </HelperText> 
+                        </View>
+                        <View>
+                            <TextInput       
+                                mode="outlined"
+                                onChangeText={handleChange('verification')}
+                                label="Подтвердите пароль"
+                                value={values.verification}
+                                placeholder="Подтвердите пароль"
+                                secureTextEntry={isShowPassword.verification}
+                                right={<TextInput.Icon onPress={() => setIsShowPassword((prev) => ({...prev, verification: !prev.verification}))} icon="eye" />}
+                                style={{ marginBottom: 8 }}
+                                error={!!errors.verification}
+                            /> 
+                            <HelperText type="error" visible={!!errors.verification}>
+                                {errors.verification}
                             </HelperText> 
                         </View>
                     </View>
