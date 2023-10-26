@@ -1,46 +1,36 @@
+import { GetPosts, LemmyHttp, PostView } from 'lemmy-js-client'
 import { useState } from 'react'
 
-export interface Link {
-    url: string
-}
+import { baseUrl } from '../common'
 
-export interface Post {
-    readonly id: number
-    title: string
-    description?: string
-    img?: string
-    link: Link
+export interface NewGetPosts extends GetPosts {}
+export interface PostsResponse {
+    error?: string
 }
 
 export const usePosts = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [posts, setPosts] = useState<PostView[]>([])
 
-    const _posts = [
-        {
-            id: 0,
-            title: 'title',
-            link: { url: 'link' },
-            img: '',
-        },
-    ]
-
-    const [posts, setPosts] = useState<Post[]>(_posts)
-
-    const create = (link: string) => {
+    const getPosts = async (req?: NewGetPosts): Promise<PostsResponse> => {
         setIsLoading(true)
-        setPosts([
-            ..._posts,
-            {
-                id: 1,
-                title: link,
-                link: {
-                    url: link,
-                },
-                img: '',
-            },
-        ])
+        try {
+            const client: LemmyHttp = new LemmyHttp(baseUrl)
+            const res = await client.getPosts(req)
+            setPosts(res.posts)
+
+            return {}
+        } catch (e) {
+            return { error: e?.toString() }
+        } finally {
+            setIsLoading(false)
+        }
+    }
+
+    const create = () => {
+        setIsLoading(true)
         setIsLoading(false)
     }
 
-    return { posts, isLoading, create }
+    return { posts, getPosts, isLoading, create }
 }
