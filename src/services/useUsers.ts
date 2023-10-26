@@ -6,7 +6,7 @@ import { useState } from 'react'
 import { baseUrl } from '../common'
 
 export interface NewRegister extends Omit<Register, 'show_nsfw' | 'honeypot' | 'answer'> {}
-export interface NewLogin extends Omit<Login, ''> {}
+export interface NewLogin extends Login {}
 export interface RegisterResponse {
     reg: boolean
     verify_email_sent?: LoginResponse['verify_email_sent']
