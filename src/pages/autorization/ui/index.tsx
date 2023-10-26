@@ -65,17 +65,17 @@ const Autorization = (props: Props) => {
                                         </HelperText>
                                     </View>
                                     <View>
-                                    <Button style={styles.button} icon="" loading={false} mode="contained-tonal" onPress={() => {
-                                        handleSubmit()
-                                        handleReset()
-                                    }}>
-                                        Авторизоваться
-                                    </Button>
-                                    <Text style={styles.navRegistration} onPress={() => { 
-                                        navigation.navigate('Registration', {})
-                                    }} variant="labelSmall">
-                                        Зарегестрироваться
-                                    </Text> 
+                                        <Button style={styles.button} icon="" loading={false} mode="contained-tonal" onPress={() => {
+                                            handleSubmit()
+                                            handleReset()
+                                        }}>
+                                            Авторизоваться
+                                        </Button>
+                                        <Text style={styles.navRegistration} onPress={() => { 
+                                            navigation.navigate('Registration', {})
+                                        }} variant="labelSmall">
+                                            Зарегестрироваться
+                                        </Text> 
                                 </View>
                                 </View>
                             </View>

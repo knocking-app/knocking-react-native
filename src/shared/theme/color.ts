@@ -1,5 +1,6 @@
 export const appColor = {
     main: '#282339',
+    header: '#524E60',
     systemsInfo: '#0099E5',
     textPrimary: '#E3E3E4',
     states04: 'rgba(105, 235, 251, 0.3)',
