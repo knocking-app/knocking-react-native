@@ -1,11 +1,17 @@
 /* eslint-disable camelcase */
-import { LemmyHttp, Login } from 'lemmy-js-client'
+import { LemmyHttp, Login, LoginResponse } from 'lemmy-js-client'
 import { Register } from 'lemmy-js-client/dist/types/Register'
 import { useState } from 'react'
 
 import { baseUrl } from '../common'
 
 export interface NewRegister extends Omit<Register, 'show_nsfw' | 'honeypot' | 'answer'> {}
+export interface NewLogin extends Omit<Login, ''> {}
+export interface RegisterResponse {
+    reg: boolean
+    verify_email_sent?: LoginResponse['verify_email_sent']
+    error?: string
+}
 
 export const useUsers = () => {
     const [user, setUser] = useState<string | null>(null)
@@ -15,7 +21,7 @@ export const useUsers = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [loginError, setLoginError] = useState('')
 
-    const auth = async (loginForm: Login) => {
+    const auth = async (loginForm: NewLogin) => {
         setIsLoading(true)
         try {
             const client: LemmyHttp = new LemmyHttp(baseUrl)
@@ -26,12 +32,6 @@ export const useUsers = () => {
                 setRegistrationCreated(auth.registration_created)
                 setVerifyEmailSent(auth.verify_email_sent)
                 setUser(loginForm.username_or_email)
-
-                const getSite = await client.getSite({
-                    auth: auth.jwt,
-                })
-                // eslint-disable-next-line no-console
-                console.log('getSite', getSite)
             } else {
                 setLoginError('Ошибка авторизации')
             }
@@ -42,11 +42,20 @@ export const useUsers = () => {
         }
     }
 
-    const reg = async (regForm: NewRegister) => {
-        const client: LemmyHttp = new LemmyHttp(baseUrl)
-        const register = await client.register({ ...regForm, show_nsfw: false, captcha_uuid: captchaUuid })
-        // eslint-disable-next-line no-console
-        console.log('reg: ', register)
+    const reg = async (regForm: NewRegister): Promise<RegisterResponse | undefined> => {
+        try {
+            const client: LemmyHttp = new LemmyHttp(baseUrl)
+            const res = await client.register({ ...regForm, show_nsfw: false, captcha_uuid: captchaUuid })
+
+            if (!res.registration_created && !res.verify_email_sent) {
+                // eslint-disable-next-line no-console
+                console.log('Error', 'An error occurred while completing registration.')
+            } else {
+                return { reg: true, verify_email_sent: res.verify_email_sent }
+            }
+        } catch (e) {
+            return { reg: false, error: e?.toString() }
+        }
     }
 
     const logout = () => {
