@@ -18,5 +18,10 @@ export const styles = StyleSheet.create({
     navRegistration: {
         textDecorationLine: 'underline',
         textAlign: 'center'
+    },
+    iconWrapper: {
+        position: 'absolute',
+        bottom: 200,
+        left: 120
     }
   })

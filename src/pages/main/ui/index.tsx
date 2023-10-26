@@ -1,5 +1,4 @@
 import { View } from "react-native"
-import AddUrlPanel from "../../../widgets/addUrl/ui"
 import AppBar from "../../../widgets/appBar/ui"
 import ListItems from "../../../widgets/listItems/ui"
 import { styles } from "./index.styled"
